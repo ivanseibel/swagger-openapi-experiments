@@ -25,35 +25,18 @@
       margin: 0;
       background: #fafafa;
     }
+
+    h1 {
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
-  <div id="swagger-ui"></div>
-
-  <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
-  <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
-  <script>
-    window.onload = function () {
-      // Begin Swagger UI call region
-      const ui = SwaggerUIBundle({
-        url: "h-plus-sports-api.yaml",
-        dom_id: '#swagger-ui',
-        deepLinking: true,
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIStandalonePreset
-        ],
-        plugins: [
-          SwaggerUIBundle.plugins.DownloadUrl
-        ],
-        layout: "StandaloneLayout"
-      });
-      // End Swagger UI call region
-
-      window.ui = ui;
-    };
-  </script>
+  <div class="titles">
+    <h1><a href="store-index.html">H Plus Sports API</a></h1>
+    <h1><a href="blog-index.html">H Plus Blog API</a></h1>
+  </div>
 </body>
 
 </html>

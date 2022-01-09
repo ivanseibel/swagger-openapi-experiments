@@ -7,8 +7,21 @@ tags:
     description: Articles for the H Plus Sports Blog
 paths:
   /article:
+    post:
+      tags:
+        - Article
+      description: Add a new article
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Article"
+
+      responses:
+        201:
+          description: The article has been created
     get:
-      tags: 
+      tags:
         - Article
       responses:
         200:
@@ -18,21 +31,29 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    createdDate:
-                      format: date
-                      type: string
-                    tagline:
-                      type: string
-                      example: Tag line example
-                    content:
-                      type: string
-                      example: This could be an html that represents the content of an article
-                    category:
-                      type: string
-                      example: economy
-                    tags:
-                      type: array
-                      items:
-                        type: string
+                  $ref: "#/components/schemas/Article"
+components:
+  schemas:
+    Article:
+      type: object
+      required:
+        - tagline
+        - content
+        - category
+      properties:
+        createdDate:
+          format: date
+          type: string
+        tagline:
+          type: string
+          example: Tag line example
+        content:
+          type: string
+          example: This could be an html that represents the content of an article
+        category:
+          type: string
+          example: economy
+        tags:
+          type: array
+          items:
+            type: string

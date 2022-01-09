@@ -5,6 +5,39 @@ info:
 tags:
   - name: Product
 paths:
+  /product/{productId}:
+    get:
+      tags:
+        - Product
+      parameters:
+        - in: path
+          name: productId
+          description: Product id
+          required: true
+          schema:
+            type: integer
+            example: 123
+        - in: header
+          name: customer-security-header
+          description: Customer token
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: This is a specific product from the catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 400
+                  name:
+                    type: string
+                    example: Lemon Water
+
   /product:
     get:
       tags:

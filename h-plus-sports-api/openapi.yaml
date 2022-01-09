@@ -29,16 +29,20 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    example: 400
-                  name:
-                    type: string
-                    example: Lemon Water
-
+                $ref: "#/components/schemas/Product"
   /product:
+    post:
+      tags:
+        - Product
+      description: Add a product to the catalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        201:
+          description: The product has been created
     get:
       tags:
         - Product
@@ -66,10 +70,31 @@ paths:
               schema:
                 type: array
                 items:
-                  properties:
-                    id:
-                      type: integer
-                      example: 400
-                    name:
-                      type: string
-                      example: Lemon Water
+                  $ref: "#/components/schemas/Product"
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: Product id
+          example: 123
+        name:
+          type: string
+          description: Product description
+          example: Bluetooth mouse
+        description:
+          type: string
+          description: Detailed description of the product
+          example: 3-button wireless optical mouse
+        image_title:
+          type: string
+          description: Image title of the product
+          example: 3-button-wireless-mouse
+        image:
+          type: string
+          description: Product image's url
+          example: https://server.com/images/123.jpeg

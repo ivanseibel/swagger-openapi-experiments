@@ -2,10 +2,10 @@ openapi: 3.0.0
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/seibel-personal/customer/1.0.0
+    url: https://virtserver.swaggerhub.com/seibel-personal/customer/2.0.0
 info:
   description: This is an API for HPlusSports customers
-  version: "1.0.0"
+  version: 2.0.0
   title: Customers API
   contact:
     email: you@hplussport.com
@@ -41,15 +41,19 @@ components:
     Customer:
       type: object
       required:
-        - name
+        - firstName
+        - lastName
         - customerNumber
       properties:
-        name:
-          type: string
-          example: John Doe
         customerNumber:
           type: string
           example: 1g23g41i34
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
         phoneNumber:
           type: string
           example: 55-5555-5555

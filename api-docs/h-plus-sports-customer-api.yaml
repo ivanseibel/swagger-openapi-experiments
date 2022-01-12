@@ -47,7 +47,7 @@ components:
       properties:
         customerNumber:
           type: string
-          example: 1g23g41i34
+          example: 1g23g41i3
         firstName:
           type: string
           example: John

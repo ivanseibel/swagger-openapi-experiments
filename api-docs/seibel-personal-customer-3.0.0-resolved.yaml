@@ -1,0 +1,59 @@
+---
+openapi: 3.0.0
+info:
+  title: Customers API
+  description: This is an API for HPlusSports customers
+  contact:
+    email: you@hplussport.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 3.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/seibel-personal/customer/3.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: customer
+  description: Customer related calls
+paths:
+  /customer:
+    get:
+      tags:
+      - customer
+      summary: searches customer
+      description: |
+        By passing in the appropriate options, you can search for
+        available customers in the system
+      operationId: searchCustomer
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        "400":
+          description: bad input parameter
+components:
+  schemas:
+    Customer:
+      required:
+      - customerNumber
+      - firstName
+      - lastName
+      type: object
+      properties:
+        customerNumber:
+          type: string
+          example: 1g23g41i34
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        phoneNumber:
+          type: string
+          example: 55-5555-5555

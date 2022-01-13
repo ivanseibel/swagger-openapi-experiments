@@ -8,11 +8,38 @@ servers:
 tags:
 - name: product
   description: This is the product related operations
+- name: order
+  description: This is the order related operations
 paths:
+  /order:
+    post:
+      tags:
+      - order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        "201":
+          description: The order has been created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+      security:
+      - password:
+        - write
   /product/{productId}:
     get:
       tags:
-      - Product
+      - product
       parameters:
       - name: productId
         in: path
@@ -131,6 +158,43 @@ components:
           type: string
           description: Product image's url
           example: https://server.com/images/123.jpeg
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        productId:
+          type: integer
+          example: 1234
+        quantity:
+          type: integer
+          example: 1
+        orderDate:
+          type: string
+          format: date-time
+          example: 2022-01-31T12:13:00-08:00
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      required:
+      - customerNumber
+      - firstName
+      - lastName
+      type: object
+      properties:
+        customerNumber:
+          type: string
+          example: 1g23g41i34
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        phoneNumber:
+          type: string
+          example: 55-5555-5555
     inline_response_500:
       type: object
       properties:

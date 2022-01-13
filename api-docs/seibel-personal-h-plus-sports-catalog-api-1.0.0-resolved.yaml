@@ -4,7 +4,8 @@ info:
   title: H Plus Sports Catalog API
   version: 1.0.0
 servers:
-- url: /
+- url: https://virtserver.swaggerhub.com/seibel-personal/h-plus-sports-catalog-api/1.0.0
+  description: SwaggerHub API Auto Mocking
 tags:
 - name: product
   description: This is the product related operations

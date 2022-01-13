@@ -1,0 +1,168 @@
+---
+openapi: 3.0.0
+info:
+  title: H Plus Sports API
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- name: product
+  description: This is the product related operations
+paths:
+  /product/{productId}:
+    get:
+      tags:
+      - Product
+      parameters:
+      - name: productId
+        in: path
+        description: Product id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 123
+      - name: customer-security-header
+        in: header
+        description: Customer token
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: This is a specific product from the catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+  /product:
+    get:
+      tags:
+      - Product
+      parameters:
+      - name: pageNumber
+        in: query
+        description: Page number to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1
+      - name: pageSize
+        in: query
+        description: Number of the items per page
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          type: integer
+          example: 10
+      responses:
+        "200":
+          description: This is a list of the products in the catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+    post:
+      tags:
+      - Product
+      description: Add a product to the catalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        "201":
+          description: The product has been created
+        "500":
+          description: This is an unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+components:
+  schemas:
+    Product:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product id
+          example: 123
+        name:
+          type: string
+          description: Product description
+          example: Bluetooth mouse
+        description:
+          type: string
+          description: Detailed description of the product
+          example: 3-button wireless optical mouse
+        image_title:
+          type: string
+          description: Image title of the product
+          example: 3-button-wireless-mouse
+        image:
+          type: string
+          description: Product image's url
+          example: https://server.com/images/123.jpeg
+    inline_response_500:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "500"
+        message:
+          type: string
+          example: Server error
+  responses:
+    "500ApiError":
+      description: This is an unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_500'
+  parameters:
+    PageNumber:
+      name: pageNumber
+      in: query
+      description: Page number to return
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        example: 1
+    PageSize:
+      name: pageSize
+      in: query
+      description: Number of the items per page
+      required: false
+      style: form
+      explode: true
+      schema:
+        maximum: 100
+        type: integer
+        example: 10

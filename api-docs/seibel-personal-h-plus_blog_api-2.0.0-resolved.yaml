@@ -1,0 +1,73 @@
+---
+openapi: 3.0.0
+info:
+  title: H Plus Blog API
+  version: 2.0.0
+servers:
+- url: /
+tags:
+- name: Article
+  description: Articles for the H Plus Sports Blog
+paths:
+  /article:
+    get:
+      tags:
+      - Article
+      responses:
+        "200":
+          description: This is a list of the X Blog's articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+    post:
+      tags:
+      - Article
+      description: Add a new article
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+      responses:
+        "201":
+          description: The article has been created
+      security:
+      - password:
+        - write
+components:
+  schemas:
+    Article:
+      required:
+      - category
+      - content
+      - tagline
+      type: object
+      properties:
+        createdDate:
+          type: string
+          format: date
+        tagline:
+          type: string
+          example: Tag line example
+        content:
+          type: string
+          example: This could be an html that represents the content of an article
+        category:
+          type: string
+          example: economy
+        tags:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    password:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: http://example.com/oauth/token
+          scopes:
+            write: allows modifying resources
+            read: allows reading resources

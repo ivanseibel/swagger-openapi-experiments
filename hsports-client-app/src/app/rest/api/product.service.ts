@@ -29,7 +29,7 @@ import { Configuration } from '../configuration';
 @Injectable()
 export class ProductService {
 
-  protected basePath = 'https://virtserver.swaggerhub.com/seibel-personal/h-plus-sports-catalog-api/1.0.0';
+  protected basePath = 'http://localhost:8080';
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
 
